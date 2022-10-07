@@ -7,17 +7,21 @@ class GenreAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'created', 'modified')
     search_fields = ('name', 'description', 'id')
 
+
 class GenreFilmworkInline(admin.TabularInline):
     model = GenreFilmwork
 
+
 class PersonFilmworkInline(admin.TabularInline):
     model = PersonFilmwork
+
 
 @admin.register(Filmwork)
 class FilmWorkAdmin(admin.ModelAdmin):
     inlines = (GenreFilmworkInline, PersonFilmworkInline,)
     # Отображение полей в списке
-    list_display = ('title', 'type', 'creation_date', 'rating', 'created', 'modified')
+    list_display = ('title', 'type', 'creation_date',
+                    'rating', 'created', 'modified')
 
     # Фильтрация в списке
     list_filter = ('type',)
@@ -29,4 +33,3 @@ class FilmWorkAdmin(admin.ModelAdmin):
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'created', 'modified')
     search_fields = ('full_name', 'id')
-

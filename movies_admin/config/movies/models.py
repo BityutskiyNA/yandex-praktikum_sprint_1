@@ -5,16 +5,18 @@ from django.utils.translation import gettext_lazy as _
 
 
 class TimeStampedMixin(models.Model):
-    created = models.DateTimeField(_('created'),auto_now_add=True)
-    modified = models.DateTimeField(_('modified'),auto_now=True)
+    created = models.DateTimeField(_('created'), auto_now_add=True)
+    modified = models.DateTimeField(_('modified'), auto_now=True)
 
     class Meta:
-        # Этот параметр указывает Django, что этот класс не является представлением таблицы
+        # Этот параметр указывает Django,
+        # что этот класс не является представлением таблицы
         abstract = True
 
 
 class UUIDMixin(models.Model):
-    id = models.UUIDField(_('id'), primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(_('id'), primary_key=True,
+                          default=uuid.uuid4, editable=False)
 
     class Meta:
         abstract = True
@@ -56,8 +58,9 @@ class Filmwork(UUIDMixin, TimeStampedMixin):
     title = models.CharField(_('title'), max_length=255)
     description = models.TextField(_('description'), blank=True)
     creation_date = models.DateField(_('creation_date'), blank=True)
-    rating = models.FloatField(_('rating'), blank=True, validators=[MinValueValidator(0),
-                                                                 MaxValueValidator(100)])
+    rating = models.FloatField(_('rating'), blank=True,
+                               validators=[MinValueValidator(0),
+                                           MaxValueValidator(100)])
     genres = models.ManyToManyField(Genre, through='GenreFilmwork')
     Persons = models.ManyToManyField(Person, through='PersonFilmwork')
     type = models.TextField(_('type'), blank=True)
@@ -78,5 +81,3 @@ class GenreFilmwork(UUIDMixin):
 
     class Meta:
         db_table = "content\".\"genre_film_work"
-
-

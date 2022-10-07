@@ -1,6 +1,6 @@
 django==3.2
-flake8==4.0  # Разумеется, вам потребуется линтер :)
+flake8==4.0
 python-dotenv
-# django split settings
 split_settings
 psycopg2
+flake8

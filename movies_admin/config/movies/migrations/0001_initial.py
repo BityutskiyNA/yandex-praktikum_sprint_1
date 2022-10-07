@@ -17,13 +17,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Filmwork',
             fields=[
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='created')),
-                ('modified', models.DateTimeField(auto_now=True, verbose_name='modified')),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, verbose_name='id')),
-                ('title', models.CharField(max_length=255, verbose_name='title')),
-                ('description', models.TextField(blank=True, verbose_name='description')),
-                ('creation_date', models.DateTimeField(blank=True, verbose_name='creation_date')),
-                ('rating', models.FloatField(blank=True, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], verbose_name='rating')),
+                ('created', models.DateTimeField(auto_now_add=True,
+                                                 verbose_name='created')),
+                ('modified', models.DateTimeField(auto_now=True,
+                                                  verbose_name='modified')),
+                ('id', models.UUIDField(default=uuid.uuid4, editable=False,
+                                        primary_key=True, serialize=False,
+                                        verbose_name='id')),
+                ('title', models.CharField(max_length=255,
+                                           verbose_name='title')),
+                ('description', models.TextField(blank=True,
+                                                 verbose_name='description')),
+                ('creation_date', models.DateTimeField(blank=True,
+                                                       verbose_name='creation_date')),
+                ('rating', models.FloatField(blank=True,
+                                             validators=[django.core.validators.MinValueValidator(0),
+                                                         django.core.validators.MaxValueValidator(100)],
+                                             verbose_name='rating')),
                 ('type', models.TextField(blank=True, verbose_name='type')),
             ],
             options={
@@ -64,11 +74,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PersonFilmwork',
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, verbose_name='id')),
+                ('id', models.UUIDField(default=uuid.uuid4, editable=False,
+                                        primary_key=True, serialize=False,
+                                        verbose_name='id')),
                 ('role', models.TextField(null=True, verbose_name='role')),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('film_work', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.filmwork')),
-                ('person', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.person')),
+                ('film_work', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                                to='movies.filmwork')),
+                ('person', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                             to='movies.person')),
             ],
             options={
                 'db_table': 'content"."person_film_work',
@@ -77,10 +91,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='GenreFilmwork',
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, verbose_name='id')),
+                ('id', models.UUIDField(default=uuid.uuid4, editable=False,
+                                        primary_key=True, serialize=False,
+                                        verbose_name='id')),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('film_work', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.filmwork')),
-                ('genre', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.genre')),
+                ('film_work', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                                to='movies.filmwork')),
+                ('genre', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                            to='movies.genre')),
             ],
             options={
                 'db_table': 'content"."genre_film_work',
@@ -89,11 +107,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='filmwork',
             name='Persons',
-            field=models.ManyToManyField(through='movies.PersonFilmwork', to='movies.Person'),
+            field=models.ManyToManyField(through='movies.PersonFilmwork',
+                                         to='movies.Person'),
         ),
         migrations.AddField(
             model_name='filmwork',
             name='genres',
-            field=models.ManyToManyField(through='movies.GenreFilmwork', to='movies.Genre'),
+            field=models.ManyToManyField(through='movies.GenreFilmwork',
+                                         to='movies.Genre'),
         ),
     ]
