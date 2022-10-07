@@ -41,4 +41,14 @@ CREATE TABLE IF NOT EXISTS content.person_film_work (
     created timestamp with time zone
 );
 
+CREATE UNIQUE INDEX IF NOT EXISTS film_work_person_idx ON content.person_film_work (id, person_id, film_work_id);
+CREATE UNIQUE INDEX IF NOT EXISTS film_work_person_idx ON content.genre_film_work (id, genre_id, film_work_id);
+CREATE UNIQUE INDEX IF NOT EXISTS film_work_person_idx ON content.person (id, full_name);
+CREATE UNIQUE INDEX IF NOT EXISTS film_work_person_idx ON content.genre (id, name);
+CREATE UNIQUE INDEX IF NOT EXISTS film_work_person_idx ON content.film_work (id, title);
+
+CREATE INDEX IF NOT EXISTS film_work_person_idx ON content.film_work (title);
+CREATE INDEX IF NOT EXISTS film_work_person_idx ON content.person (full_name);
+CREATE INDEX IF NOT EXISTS film_work_person_idx ON content.genre (name);
+
 SET search_path TO content,public;
